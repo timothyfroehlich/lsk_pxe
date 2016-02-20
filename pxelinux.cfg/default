@@ -1,0 +1,45 @@
+serial 0x3f8 115200
+default menu.c32
+#timeout 50
+prompt 0
+menu title Boot menu (x86_64)
+
+label eb840
+	kernel mboot.c32
+	append eb840.srp
+
+label nuc
+	kernel mboot.c32
+	append nuc.srp
+
+label autoconfig
+	menu label ^LynxSecure Autoconfig 5.3
+	menu default
+	kernel /autoconfig-kernel-x86_64
+	append initrd=/autoconfig-ramdisk-x86_64.img pci=nomsi pci=routeirq pci=use_crs console=ttyS0,115200 console=tty1 cdknfspath=10.20.31.1:/home/nfs
+
+label bzImage
+	kernel bzImage
+	append console=ttyS0 console=tty0 text
+
+label vds
+	kernel 
+
+
+label xeon lazarus
+	kernel mboot.c32
+	append xeon_w_lazarus.srp
+
+label folio
+	menu label ^Folio
+	kernel mboot.c32
+	append folio.srp
+
+label Downey_bzimage
+	kernel Downey.bzimg 
+	append console=ttyS0,115200
+
+label harddisk
+	menu label Boot from ^Hard Drive
+	kernel chain.c32
+	append hd0 0
